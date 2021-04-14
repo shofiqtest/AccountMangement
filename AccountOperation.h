@@ -7,12 +7,16 @@
 #include<iomanip>
 #include <algorithm>
 
+// GENERIC NOTE: You should put actual source code to .cpp files and definitions of classes and function to the header file. With the exception that template classes must be defined in the header. 
+
 using namespace std;
 
 // constant variable
 const string CUSTOMER = "customer";
 const string ENTERPRISE = "enterprise";
 
+
+// Suggestion: Define an enum class for the account type. More intuitive and much easier to handle in the code.
 struct Account // accounts
 {
 	long accountID;
@@ -32,7 +36,7 @@ long Create_Unique_ID()
 	UuidCreate(&uuid);
 	char* ustr;
 	UuidToStringA(&uuid, (RPC_CSTR*)&ustr);
-
+	// You should always check the result of the function.
 
 	string  str(ustr);
 	for (int i = 0; i < str.size(); i++)
@@ -51,6 +55,7 @@ long Create_Unique_ID()
 const string currentDateTime() // https://stackoverflow.com/questions/997946/how-to-get-current-time-and-date-in-c. 
 
 {
+	// I would suggest to take a look into native Chrono library in C++
 	time_t     now = time(0);
 	struct tm  tstruct;
 	char       buf[80];
@@ -64,7 +69,7 @@ string Ask_Type_Of_Account()
 
 {
 	cout << "----------------- Ask_Type_Of_Account -----------------";
-
+	// Suggestion: Make separate function which prints instructions.
 	string type;
 	cout << "\nEnter Type of The account"
 		<< "\nEnter " << CUSTOMER << " for Customer Account"
@@ -76,13 +81,14 @@ string Ask_Type_Of_Account()
 
 	cout << "\n----------------- Ask_Type_Of_Account -----------------";
 
+	// I think it's good habit to add braces even with the one liners.
 	if (type == CUSTOMER || type == ENTERPRISE)
 		return type;
 	else
 
 	{
 		cout << "\nInvalid Type\n";
-		Ask_Type_Of_Account();
+		Ask_Type_Of_Account(); // This looks tiny bit suspicious. First of all you should return a string (which you don't) and secondly I wouldn't do recursion here.
 	}
 }
 
