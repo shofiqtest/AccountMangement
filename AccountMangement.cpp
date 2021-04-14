@@ -10,8 +10,8 @@
 
 int main() {
 
-	string type;
-	type = Ask_Type_Of_Account();
+	string type; 
+	type = Ask_Type_Of_Account(); // You could actually initialize type with the output of Ask_Type_Of_Account
 	Create_Account(type);
 	ask_customer_choice();
 
