@@ -3,9 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("AccountMangement")
+project (AccountMangement)
 
 # Add source to this project's executable.
-add_executable (AccountMangement "AccountMangement.cpp" "AccountMangement.h" "AccountOperation.h")
+add_executable (AccountMangement AccountManagement.cpp AccountOperation.h AccountOperation.cpp)
 
 # TODO: Add tests and install targets if needed.

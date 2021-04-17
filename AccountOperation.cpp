@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <iostream>
 
+
+
 using namespace std;
 
 long Create_Unique_ID()
@@ -32,17 +34,13 @@ long Create_Unique_ID()
 	return randomizer;
 }
 
-
-const string currentDateTime() // https://stackoverflow.com/questions/997946/how-to-get-current-time-and-date-in-c. 
-
+string currentDateTime() // https://stackoverflow.com/questions/997946/how-to-get-current-time-and-date-in-c. 
 {
-	// I would suggest to take a look into native Chrono library in C++
-	time_t     now = time(0);
-	struct tm  tstruct;
-	char       buf[80];
-	localtime_s(&tstruct, &now); // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
-	strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tstruct); // for more information about date/time format.
-	return buf;
+	using namespace std::chrono;
+	time_t now = system_clock::to_time_t(system_clock::now());
+	char buffer[26];
+	errno_t error = ctime_s(buffer, sizeof(buffer), &now);
+	return buffer;
 }
 
 Account::Type Ask_Type_Of_Account()
@@ -51,7 +49,8 @@ Account::Type Ask_Type_Of_Account()
 	const string Enterprise = "enterprise";
 
 	Account::Type inputType = Account::INVALID;
-	while (inputType == Account::INVALID) {
+	while (inputType == Account::INVALID) 
+	{
 		cout << "----------------- Ask_Type_Of_Account -----------------";
 		// Suggestion: Make separate function which prints instructions.
 		string type;
@@ -105,7 +104,9 @@ void Create_Account(Account::Type type)
 		cin >> Company_Name;
 	}
 
-	if (type == Account::CUSTOMER || type == Account::ENTERPRISE) {
+	if (type == Account::CUSTOMER || type == Account::ENTERPRISE) 
+	
+	{
 
 		cout << "\nAccount created successfully!";
 
